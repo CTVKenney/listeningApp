@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "get-pinyin-50363",
+  "private_key_id": "fab7d7f4aa837afeb3347453e049d33101497db6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCkY8LKHh+gobrp\njOSI+gFEr3Ts1RpfEZ3UUlrs24pbriHPtDi773uCMCWyA4C2rQXDGqNS8RQkSiIX\nEAAy+C8YFBAI3c5ivBpEBCYC+cWyB1tiMW/hgmHqDOb135/kOnonxlEodzE49d2q\nbrgRttk9KnIkjATROCfroCtX51fiAhzzUoyrJojgFO/mW4Jcp8hiveUFTIlEuuWu\nBjIc7kv2T5PQVv9Kwo2/VfQ6nmIEwagjKlW6cjCqmKi6UujJ/w8O5ScuXZQBqMAa\nFhjH7tbydRvSa+Jxb/jdNdIiInQUx42O6QPe973TQBc8qNcijXyHQJU204SpkeBp\nqDX0BqV3AgMBAAECggEARYuU1SgQTkcNiY+bAV3u2m12BFmVSgHsaO4cXFb2fhm5\nYSMH224RrL6Mu/YiZmXlaahjzwuBb2bTbDlPNEDtv3yBWhboILoeTIcKw7iCS/Iz\n1WM/x0H/BWLG9N7RyF563kfWfs2KC+RsDhXAFnJqDifeWRrJUO+2Z8b/fzU2Zzy6\nN4WVclVEFoV+HNXkXOYAlt56zBaA9YyDWQP7Wvi4aP3Chvw6jixEv87EudT0b+nm\nTNEzUbEZ3ioEJdy8mIaqOyidICnzNZyZ0L9DNGnoWKq9aG92fmN+cJQGH0P0m93w\nYwXVpa2rognG9/kfZaBSrPxGU5EWnDNvVF9KMlHuJQKBgQDiIiyuiYVeQabv8jlQ\nZdO16DGj/9E/WVlgN+5tyUA/+zJlYJc+vYqOhmV0mmP0b8DZSkwXVWqCXnttYZqV\nkyMvK7S0i3hNRrC6qIfPPaxN8wj2bxLa1hseosJtLtaXJ+LYToau0iIbHJPeiRyw\nOAD59cInaXiR6BkqvcAbOlc3UwKBgQC6GfWljMylrbzl1YGktGU/qdYCOFAsTYu8\nvvIdSBrp/auJbLC/XuRTJzKFgIO4WbxRRD9o8DzdUzhoSoi0TQMQMYkv6dIziJkP\nr07TozBhQt8YpiXYWzg4qXpTpiMMSiQNHwyw6uFlY1669XtvqedqGgYOG+GdjVW4\nMHumBOBIzQKBgFfRY77IY0XOgzENxVpGoSg0qwqAb1eFsGLgdbSnAk+WkuSx1Sql\nWyisYrwctRKZT7BS3Sf2oO1OGerJi8nooTJRa9TtkOOZv0pN5qgB0GdZKbLiQdVA\nbrnABXd3SBjdgYf1PvKnYl1bBMXYQ47fwOlRmnvJxuwK0bM6i19HkdVHAoGAbstP\ntLzLhYOW51oiMdV4Rdut3mp6SLXuEHO5nvczlsUAH/PGklhDJMI8UMC/Kry54cP4\n4FfOVJHcDjL5iiYjQbvMCetxyl5ziaP8EQGhpvXx7jHUbCd6pDk5650IVqO5LNqk\napubjwoG9tV5JHSJomBV5IZy3qKrOtoacy+J+60CgYBbRsy+P4VQ17PB7crgWK0K\nIVMyhqVhmNmNuVoGsD/1aCDwKWAp+tNpEoXt6G4fuWPNqFmT/VMu1a9mcrvb4/9p\nPg+HnWTpTcBaPtN1CD8/uh2Q09tUpbcfL2tQXXoohGB/6Lten5lula0XaSu6hcU/\nfVhUmFAzGXJd5etfyPA0bg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "mytranslateaccount@get-pinyin-50363.iam.gserviceaccount.com",
+  "client_id": "112916127686381177365",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mytranslateaccount%40get-pinyin-50363.iam.gserviceaccount.com"
+}

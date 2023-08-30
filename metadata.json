@@ -1,0 +1,15 @@
+{
+    "samples": [
+        {
+            "id": 1,
+            "audio_file": "sample_1.mp3",
+            "characters": "如果有困难，就给我打电话.",
+            "pinyin": "Rúguǒ yǒu kùnnán, jiù gěi wǒ dǎ diànhuà.",
+            "translation": "If you have trouble, just give me a call.",
+            "tts_service": "narakeet",
+            "voice": "Xinyi",
+            "difficulty_level": "Intermediate",
+            "category": "Everyday Phrases"
+        }
+    ]
+}
