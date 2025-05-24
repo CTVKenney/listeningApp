@@ -30,10 +30,11 @@ def download_sample_audio_file(sample):
     
     with open(local_filename, 'wb') as f:
         s3.download_fileobj('chineselisteningpractice', audio_key, f)
+    
+    print(f'Downloaded {audio_key} to {local_filename}')
 
     return local_filename
 
-    print(f'Downloaded {audio_key} to {local_filename}')
 
 class ListeningPracticeApp(QWidget):
     def __init__(self):
