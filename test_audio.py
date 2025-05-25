@@ -2,19 +2,31 @@
 
 import os
 import sys
-from PyQt5.QtCore import QUrl
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtWidgets import QApplication
+from PyQt6.QtCore import QUrl
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
+from PyQt6.QtWidgets import QApplication
 
-THISDIR = os.path.basename(__file__)
+THISDIR = os.path.dirname(__file__)
 
 def main():
     app = QApplication(sys.argv)
+
+    audio_output = QAudioOutput()
     player = QMediaPlayer()
-    media = QMediaContent(QUrl.fromLocalFile(os.path.join(THISDIR, 'sample_1331.mp3')))
-    player.setMedia(media)
+    player.setAudioOutput(audio_output)
+
+    media = QUrl.fromLocalFile(os.path.join(THISDIR, "sample_1331.mp3"))
+    player.setSource(media)
+    audio_output.setVolume(50)
     player.play()
+
+    # Automatically quit once playback finishes
+    player.mediaStatusChanged.connect(
+        lambda status: app.quit() if status == QMediaPlayer.MediaStatus.EndOfMedia else None
+    )
+
     sys.exit(app.exec())
 
 if __name__ == '__main__':
     main()
+
