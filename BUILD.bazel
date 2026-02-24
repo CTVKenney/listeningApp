@@ -1,0 +1,39 @@
+load("@rules_python//python:defs.bzl", "py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+py_test(
+    name = "test_add_pinyin",
+    srcs = [
+        "add_pinyin.py",
+        "tests/test_add_pinyin.py",
+    ],
+    main = "tests/test_add_pinyin.py",
+)
+
+py_test(
+    name = "test_generate_audio",
+    srcs = [
+        "generate_audio.py",
+        "tests/test_generate_audio.py",
+    ],
+    main = "tests/test_generate_audio.py",
+)
+
+py_test(
+    name = "test_app",
+    srcs = [
+        "app.py",
+        "tests/test_app.py",
+    ],
+    main = "tests/test_app.py",
+)
+
+test_suite(
+    name = "unit_tests",
+    tests = [
+        ":test_add_pinyin",
+        ":test_generate_audio",
+        ":test_app",
+    ],
+)

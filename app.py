@@ -42,7 +42,7 @@ class ListeningPracticeApp(QWidget):
         self.media_player.setAudioOutput(self.audio_output)
 
         self.setWindowTitle("Chinese Listening Practice")
-        self.setGeometry(100, 100, 400, 200)
+        self.setGeometry(100, 100, 400, 250)
 
         self.layout = QVBoxLayout()
 
@@ -56,6 +56,9 @@ class ListeningPracticeApp(QWidget):
         self.correct_pinyin_label = QLabel("")
         self.layout.addWidget(self.correct_pinyin_label)
 
+        self.english_label = QLabel("")  # For English translation
+        self.layout.addWidget(self.english_label)
+
         self.replay_button = QPushButton('Replay')
         self.replay_button.setEnabled(False)
         self.replay_button.clicked.connect(self.replay)
@@ -65,6 +68,11 @@ class ListeningPracticeApp(QWidget):
         self.show_button.setEnabled(False)
         self.show_button.clicked.connect(self.show_pinyin)
         self.layout.addWidget(self.show_button)
+
+        self.show_english_button = QPushButton('Show English')
+        self.show_english_button.setEnabled(False)
+        self.show_english_button.clicked.connect(self.show_english)
+        self.layout.addWidget(self.show_english_button)
 
         self.exit_button = QPushButton('Exit')
         self.exit_button.clicked.connect(self.exit_app)
@@ -86,8 +94,10 @@ class ListeningPracticeApp(QWidget):
         if not self.metadata:
             self.download_metadata()
 
+        # Clear previous displays
         self.sentence_label.clear()
         self.correct_pinyin_label.clear()
+        self.english_label.clear()
 
         self.sample = random.choice(self.metadata)
         local_filename = download_sample_audio_file(self.sample)
@@ -97,18 +107,33 @@ class ListeningPracticeApp(QWidget):
         self.audio_output.setVolume(50)
         self.media_player.play()
 
+        # Update button states
         self.start_button.setEnabled(False)
+        self.replay_button.setEnabled(True)
+        self.show_button.setEnabled(True)
+        self.show_english_button.setEnabled(False)
+
+        # Clean up previous file
         if self.prev_audio_file and os.path.exists(self.prev_audio_file):
             os.remove(self.prev_audio_file)
         self.prev_audio_file = file_path
 
-        self.replay_button.setEnabled(True)
-        self.show_button.setEnabled(True)
-
     def show_pinyin(self):
-        self.correct_pinyin_label.setText(self.sample['pinyin'])
+        # Display Chinese text and Pinyin
         self.sentence_label.setText(self.sample['characters'])
+        self.correct_pinyin_label.setText(self.sample['pinyin'])
+
+        # Enable English button
         self.start_button.setEnabled(True)
+        self.show_english_button.setEnabled(True)
+
+    def show_english(self):
+        # Display the English translation
+        translation = self.sample.get('translation', '')
+        self.english_label.setText(translation)
+
+        # Prevent re-clicks
+        self.show_english_button.setEnabled(False)
 
     def replay(self):
         self.media_player.stop()

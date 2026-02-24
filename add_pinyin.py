@@ -1,28 +1,73 @@
 #!/usr/bin/env python3
 
-import boto3
 import json
-from pypinyin import lazy_pinyin, Style
+
+DEFAULT_BUCKET = "chineselisteningpractice"
+DEFAULT_METADATA_KEY = "metadata.json"
 
 
-def get_pinyin_pypinyin(characters):
-    pinyin_list = lazy_pinyin(characters, style=Style.TONE)
-    pinyin_str = ' '.join(pinyin_list)
-    pinyin_str_cleaned = pinyin_str.strip()
-    return pinyin_str_cleaned
+def create_s3_client():
+    import boto3
+    return boto3.client("s3")
 
-s3 = boto3.client('s3')
 
-def update_metadata(bucket_name, key):
-    response = s3.get_object(Bucket=bucket_name, Key=key)
-    content = response['Body'].read().decode('utf-8')
-    metadata = json.loads(content)
-    samples = metadata['samples']
+def default_pinyin_dependencies():
+    from pypinyin import Style, lazy_pinyin
+    return lazy_pinyin, Style.TONE
+
+
+def get_pinyin_pypinyin(characters, lazy_pinyin_fn=None, tone_style=None):
+    if lazy_pinyin_fn is None:
+        lazy_pinyin_fn, tone_style = default_pinyin_dependencies()
+    pinyin_list = lazy_pinyin_fn(characters, style=tone_style)
+    return " ".join(pinyin_list).strip()
+
+
+def load_metadata(s3_client, bucket_name, key):
+    response = s3_client.get_object(Bucket=bucket_name, Key=key)
+    content = response["Body"].read().decode("utf-8")
+    return json.loads(content)
+
+
+def apply_pinyin_to_samples(metadata, lazy_pinyin_fn=None, tone_style=None):
+    samples = metadata.get("samples", [])
     for sample in samples:
-        characters = sample['characters']
-        pinyin_str = get_pinyin_pypinyin(characters)
-        sample['pinyin'] = pinyin_str
-    metadata_json = json.dumps(metadata, ensure_ascii=False)
-    s3.put_object(Body=metadata_json.encode('utf-8'), Bucket=bucket_name, Key=key)
+        characters = sample.get("characters", "")
+        sample["pinyin"] = get_pinyin_pypinyin(
+            characters=characters,
+            lazy_pinyin_fn=lazy_pinyin_fn,
+            tone_style=tone_style,
+        )
+    return metadata
 
-update_metadata('chineselisteningpractice', 'metadata.json')
+
+def write_metadata(s3_client, bucket_name, key, metadata):
+    metadata_json = json.dumps(metadata, ensure_ascii=False)
+    s3_client.put_object(
+        Body=metadata_json.encode("utf-8"),
+        Bucket=bucket_name,
+        Key=key,
+        ContentType="application/json",
+    )
+
+
+def update_metadata_in_s3(
+    bucket_name=DEFAULT_BUCKET,
+    key=DEFAULT_METADATA_KEY,
+    s3_client=None,
+    lazy_pinyin_fn=None,
+    tone_style=None,
+):
+    s3_client = s3_client or create_s3_client()
+    metadata = load_metadata(s3_client=s3_client, bucket_name=bucket_name, key=key)
+    updated = apply_pinyin_to_samples(
+        metadata=metadata,
+        lazy_pinyin_fn=lazy_pinyin_fn,
+        tone_style=tone_style,
+    )
+    write_metadata(s3_client=s3_client, bucket_name=bucket_name, key=key, metadata=updated)
+    return updated
+
+
+if __name__ == "__main__":
+    update_metadata_in_s3()
