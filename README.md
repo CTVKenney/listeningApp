@@ -15,14 +15,17 @@ A desktop app for practicing Chinese listening: you hear a sentence first, then 
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
-pip install PyQt6 boto3
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/python -m pip install -r requirements.txt
 ```
+
+This creates a project-local interpreter at `.venv/bin/python`.
+If you prefer activation, run `source .venv/bin/activate`.
 
 ### Run the app
 
 ```bash
-python3 app.py
+./.venv/bin/python app.py
 ```
 
 ### How to use the app
@@ -54,11 +57,9 @@ python3 app.py
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
-pip install PyQt6 boto3 pypinyin
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/python -m pip install -r requirements.txt
 ```
-
-`pypinyin` is needed for `add_pinyin.py`.
 
 ### Run tests
 
